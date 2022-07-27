@@ -9,10 +9,6 @@
     {
       "url": "https://virtserver.swaggerhub.com/ESLAMNAWARA44_1/todo/1.0.0",
       "description": "SwaggerHub API Auto Mocking"
-    },
-    {
-      "url": "https://virtserver.swaggerhub.com/Eslam/todo_api/1.0.0",
-      "description": "SwaggerHub API Auto Mocking"
     }
   ],
   "paths": {
@@ -126,6 +122,95 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad request, invalid input"
+          },
+          "404": {
+            "description": "Task not found"
+          }
+        }
+      },
+      "patch": {
+        "summary": "toggle completed status",
+        "operationId": "CompleteTask",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Task ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/task"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request, invalid input"
+          },
+          "404": {
+            "description": "Task not found"
+          }
+        }
+      }
+    },
+    "/todo/{id}/{item}": {
+      "patch": {
+        "summary": "edit task content",
+        "operationId": "updatedTask",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Task ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "example": 1
+            }
+          },
+          {
+            "name": "item",
+            "in": "path",
+            "description": "Task Content",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "string",
+              "example": "clean the room"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/task"
+                }
+              }
+            }
           },
           "400": {
             "description": "Bad request, invalid input"
