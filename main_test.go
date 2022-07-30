@@ -92,58 +92,7 @@ func TestAddTask(t *testing.T) {
 	})
 
 }
-/*
-func TestGetTask(t *testing.T) {
-	t.Run("Get existing task ", func(t *testing.T) {
-		defer os.Remove(DB_PATH)
-		OpenDB(DB_PATH)
-		fillDB()
-		request := httptest.NewRequest(http.MethodGet, "localhost:5000/todo/3", nil)
-		response := httptest.NewRecorder()
-		GetTask(response, request)
-		got := Task{}
-		json.NewDecoder(response.Body).Decode(&got)
-		want := Task{ID: 1, Item: "clean the room", Completed: false}
-		if !reflect.DeepEqual(got, want) {
-			t.Errorf("expected %v but got %v", want, got)
-		}
-	})
-}
 
-func TestUpdateTask(t *testing.T) {
-	t.Run("Get existing task ", func(t *testing.T) {
-		defer os.Remove(DB_PATH)
-		OpenDB(DB_PATH)
-		fillDB()
-		request := httptest.NewRequest(http.MethodPatch, "localhost:5000/todo/1", bytes.NewBuffer([]byte(`{id: 1, Item: "go shopping", Completed: false}`)))
-		response := httptest.NewRecorder()
-		UpdateTask(response, request)
-		got := Task{}
-		json.NewDecoder(response.Body).Decode(&got)
-		want := Task{ID: 1, Item: "go shopping", Completed: false}
-		if !reflect.DeepEqual(got, want) {
-			t.Errorf("expected %v but got %v", want, got)
-		}
-	})
-}
-
-func TestCompleteTask(t *testing.T) {
-	t.Run("Get existing task ", func(t *testing.T) {
-		defer os.Remove(DB_PATH)
-		OpenDB(DB_PATH)
-		fillDB()
-		request := httptest.NewRequest(http.MethodPatch, "localhost:5000/todo/1", nil)
-		response := httptest.NewRecorder()
-		CompleteTask(response, request)
-		got := Task{}
-		json.NewDecoder(response.Body).Decode(&got)
-		want := Task{ID: 1, Item: "clean the room", Completed: true}
-		if !reflect.DeepEqual(got, want) {
-			t.Errorf("expected %v but got %v", want, got)
-		}
-	})
-}
-*/
 func fillDB() {
 	request := httptest.NewRequest(http.MethodPost, "localhost:5000/todo", bytes.NewBuffer([]byte(task1)))
 	response := httptest.NewRecorder()
