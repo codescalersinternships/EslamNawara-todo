@@ -1,4 +1,4 @@
-module todoo
+module todo
 
 go 1.18
 

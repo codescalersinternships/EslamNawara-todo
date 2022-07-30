@@ -23,7 +23,7 @@ const (
 	errInvalidInput = "Bad request, invalid input"
 	errNotFound     = "Task not found"
 	LISTEN_PORT     = ":5000"
-	DB_PATH         = "todo.db"
+	DB_PATH         = "gorm.db"
 )
 
 func main() {
@@ -160,7 +160,6 @@ func UpdateTask(writer http.ResponseWriter, request *http.Request) {
 }
 
 func validateData(task Task) error {
-
 	if task.Item == "" || task.ID <= 0 {
 		return fmt.Errorf("Invalid task")
 	}

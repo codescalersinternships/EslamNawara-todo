@@ -11,15 +11,10 @@ const (
 	Req           = `{"id": %d, "item": "task id %d", "completed": %s}`
 	ServerAddress = "http://localhost:5000%s"
 
-	MethodGet     = "GET"
-	MethodHead    = "HEAD"
-	MethodPost    = "POST"
-	MethodPut     = "PUT"
-	MethodPatch   = "PATCH"
-	MethodDelete  = "DELETE"
-	MethodConnect = "CONNECT"
-	MethodOptions = "OPTIONS"
-	MethodTrace   = "TRACE"
+	MethodGet    = "GET"
+	MethodPost   = "POST"
+	MethodPatch  = "PATCH"
+	MethodDelete = "DELETE"
 )
 
 func main() {
@@ -29,7 +24,7 @@ func main() {
 	fmt.Println("*********Add new tasks*********")
 	for i := 1; i <= 10; i++ {
 		body := fmt.Sprintf(Req, i, i, "false")
-		req := buildRequest("POST", "/todo", []byte(body))
+		req := buildRequest(MethodPost, "/todo", []byte(body))
 		res, _ := client.Do(req)
 		printResponse(res)
 	}
