@@ -21,7 +21,7 @@ const (
 func TestGetTasks(t *testing.T) {
 	t.Run("Empty database", func(t *testing.T) {
 		defer os.Remove(DB_PATH)
-		OpenDB(DB_PATH)
+		OpenDB()
 		request := httptest.NewRequest(http.MethodGet, "localhost:5000/todo", nil)
 		response := httptest.NewRecorder()
 		GetTasks(response, request)
@@ -33,7 +33,7 @@ func TestGetTasks(t *testing.T) {
 	})
 	t.Run("Not empty db", func(t *testing.T) {
 		defer os.Remove(DB_PATH)
-		OpenDB(DB_PATH)
+		OpenDB()
 		fillDB()
 		request := httptest.NewRequest(http.MethodGet, "localhost:5000/todo", nil)
 		response := httptest.NewRecorder()
@@ -52,7 +52,7 @@ func TestGetTasks(t *testing.T) {
 func TestAddTask(t *testing.T) {
 	t.Run("Get existing task ", func(t *testing.T) {
 		defer os.Remove(DB_PATH)
-		OpenDB(DB_PATH)
+		OpenDB()
 		request := httptest.NewRequest(http.MethodPost, "localhost:5000/todo", bytes.NewBuffer([]byte(task1)))
 		response := httptest.NewRecorder()
 		AddTask(response, request)
@@ -63,24 +63,10 @@ func TestAddTask(t *testing.T) {
 			t.Errorf("expected %v but got %v", want, got)
 		}
 	})
-	t.Run("Get non existing task ", func(t *testing.T) {
-		defer os.Remove(DB_PATH)
-		OpenDB(DB_PATH)
-		request := httptest.NewRequest(http.MethodPost, "localhost:5000/todo", bytes.NewBuffer([]byte(task1)))
-		response := httptest.NewRecorder()
-		AddTask(response, request)
-		request = httptest.NewRequest(http.MethodPost, "localhost:5000/todo", bytes.NewBuffer([]byte(task1)))
-		response = httptest.NewRecorder()
-		AddTask(response, request)
-		got := response.Body.String()
-		want := "Bad request, task already exist\n"
-		if got != want {
-			t.Errorf("expected %v but got %v", want, got)
-		}
-	})
+
 	t.Run("Get invalid task", func(t *testing.T) {
 		defer os.Remove(DB_PATH)
-		OpenDB(DB_PATH)
+		OpenDB()
 		request := httptest.NewRequest(http.MethodPost, "localhost:5000/todo/2", bytes.NewBuffer([]byte(invalidTask)))
 		response := httptest.NewRecorder()
 		AddTask(response, request)
