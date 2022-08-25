@@ -18,7 +18,9 @@ jobs:
         go-version: 1.18
 
     - name: go test
-      run: go test src/*.go 
+      run: |
+        cd todo-server 
+        go test src/*.go 
 
     - name: build and run docker image
       uses: mr-smithers-excellent/docker-build-push@v5
