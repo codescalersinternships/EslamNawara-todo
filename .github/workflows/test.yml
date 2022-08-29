@@ -35,7 +35,7 @@ jobs:
     - name: Build and push frontend docker image
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
-        image: islamwalid/todo-front
+        image: eslamnawara/todo-front
         registry: docker.io
         directory: todo-frontend
         dockerfile: frontend/Dockerfile
