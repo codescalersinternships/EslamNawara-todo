@@ -3,8 +3,7 @@ name: test-server
 on:
   push:
     branches: [ development ]
-  pull_request:
-    branches: [ main ]
+
 
 jobs:
 
@@ -28,6 +27,7 @@ jobs:
           image: eslamnawara/todo-docker
           registry: docker.io
           directory: todo-server
+          dockerfile: todo-server/Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
@@ -38,6 +38,6 @@ jobs:
         image: eslamnawara/todo-front
         registry: docker.io
         directory: todo-frontend
-        dockerfile: frontend/Dockerfile
+        dockerfile: todo-frontend/Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
